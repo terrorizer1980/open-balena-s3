@@ -1,20 +1,20 @@
-FROM balena/open-balena-base:v5.0.0
+FROM balena/open-balena-base:armv7-fin
 
 EXPOSE 80
 
 VOLUME /export
 
-ENV GO_VERSION 1.10.3
-ENV GO_SHA256 fa1b0e45d3b647c252f51f5e1204aba049cde4af177ef9f2181f43004f901035
+ENV GO_VERSION 1.10.8
+ENV GO_SHA256 6fdbc67524fc4c15fc87014869dddce9ecda7958b78f3cb1bbc5b0a9b61bfb95
 ENV PATH ${PATH}:/usr/local/go/bin
 ENV GOPATH /go
 
 # Get Go and Minio
-RUN curl -SLO https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz && \
-    echo "${GO_SHA256} go${GO_VERSION}.linux-amd64.tar.gz" > go${GO_VERSION}.linux-amd64.tar.gz.sha256sum && \
-    sha256sum -c go${GO_VERSION}.linux-amd64.tar.gz.sha256sum && \
-    tar xz -C /usr/local -f go${GO_VERSION}.linux-amd64.tar.gz && \
-    rm go${GO_VERSION}.linux-amd64.tar.gz go${GO_VERSION}.linux-amd64.tar.gz.sha256sum && \
+RUN curl -SLO https://storage.googleapis.com/golang/go${GO_VERSION}.linux-armv6l.tar.gz && \
+    echo "${GO_SHA256} go${GO_VERSION}.linux-armv6l.tar.gz" > go${GO_VERSION}.linux-armv6l.tar.gz.sha256sum && \
+    sha256sum -c go${GO_VERSION}.linux-armv6l.tar.gz.sha256sum && \
+    tar xz -C /usr/local -f go${GO_VERSION}.linux-armv6l.tar.gz && \
+    rm go${GO_VERSION}.linux-armv6l.tar.gz go${GO_VERSION}.linux-armv6l.tar.gz.sha256sum && \
     go get -u github.com/minio/minio
 
 # systemd and minio config
